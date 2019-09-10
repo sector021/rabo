@@ -79,6 +79,15 @@ public class StatementValidatorService {
 	public List<StatementReport> checkForDuplicateRecords(List<StatementReport> records) {
 		//List<Integer> transRecords =  records.stream().map(StatementReport::getTransRef)
 			// 			    .collect(Collectors.toList());
+		//records.stream().map(pm ->pm.getTransRef).forEach(); 
+		List<Integer> transRecords = null;
+		for (final StatementReport record : records) {
+			String TransRef =(record.getTransRef()).toString();			
+			transRecords.add(record.getTransRef());  
+	        }
+		
+		
+		
 		return records.stream().collect(Collectors.groupingBy(Function.identity(),     
 	              Collectors.counting()))                                             // perform group by count
 	          .entrySet().stream()

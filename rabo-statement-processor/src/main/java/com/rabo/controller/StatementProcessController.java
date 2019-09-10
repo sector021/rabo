@@ -20,6 +20,7 @@ public class StatementProcessController {
 	public String welcome() {
 		return "OK";
 	}
+	
 	@RequestMapping(value = "/processStatment", method = RequestMethod.POST)
 	public @ResponseBody  String  statementHandler
 	(@RequestParam("file") MultipartFile statement) throws Exception {
