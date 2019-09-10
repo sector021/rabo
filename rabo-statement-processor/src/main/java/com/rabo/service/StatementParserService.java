@@ -13,7 +13,7 @@ import com.rabo.constant.raboStatementConstant;
 import com.rabo.model.StatementReport;
 
 
-@Service
+@Component
 public class StatementParserService {
 	
 	@Autowired 

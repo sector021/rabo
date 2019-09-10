@@ -23,7 +23,6 @@ import com.rabo.model.StatementReport;
 import com.rabo.model.StatementReports;
 
 @Component
-@Service
 public class StatementValidatorService {
 
 	public List<StatementReport> statmentExtractorfromCsv(File csvStatement) {

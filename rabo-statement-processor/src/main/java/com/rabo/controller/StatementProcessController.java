@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.rabo.service.StatementParserService;
 
 @RestController
@@ -15,16 +14,21 @@ import com.rabo.service.StatementParserService;
 public class StatementProcessController {
 	
 	@Autowired 
-	 StatementParserService statementParserService;
+	 private StatementParserService statementParserService;
 	
+	@RequestMapping("/welcome")
+	public String welcome() {
+		return "OK";
+	}
 	@RequestMapping(value = "/processStatment", method = RequestMethod.POST)
-	public @ResponseBody  void statementHandler
+	public @ResponseBody  String  statementHandler
 	(@RequestParam("file") MultipartFile statement) throws Exception {
 		 if (statement.isEmpty()) {
 			 
 		 }else {
 			 statementParserService.statementParser(statement);
 		 }
+		 return "OK";
 	}
 	
 	
