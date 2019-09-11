@@ -80,7 +80,25 @@ public class StatementValidatorService {
 		//List<Integer> transRecords =  records.stream().map(StatementReport::getTransRef)
 			// 			    .collect(Collectors.toList());
 		//records.stream().map(pm ->pm.getTransRef).forEach(); 
-		List<Integer> transRecords = null;
+		Map<Integer, StatementReport> uniqeRecords = new HashMap<Integer, StatementReport>();
+		List<StatementReport> duplicateRecords = new ArrayList<StatementReport>();
+		for (StatementReport record : records) {
+			if (uniqeRecords.containsKey(record.getTransRef())) {
+				duplicateRecords.add(record);
+			} else {
+				uniqeRecords.put(record.getTransRef(), record);
+			}
+		}
+		List<StatementReport> finalDuplicateRecords = new ArrayList<StatementReport>();
+		finalDuplicateRecords.addAll(duplicateRecords);
+		for (StatementReport record : duplicateRecords) {
+			if (null != uniqeRecords.get(record.getTransRef())) {
+				finalDuplicateRecords.add(uniqeRecords.get(record.getTransRef()));
+				uniqeRecords.remove(record.getTransRef());
+			}
+		}
+		return finalDuplicateRecords;
+		/* List<Integer> transRecords = null;
 		for (final StatementReport record : records) {
 			String TransRef =(record.getTransRef()).toString();			
 			transRecords.add(record.getTransRef());  
@@ -95,6 +113,6 @@ public class StatementValidatorService {
 	          .map(e -> e.getKey())                                                  // using map take only value   
 	          .collect(Collectors.toList())  ;                                      // convert group by result to list      
 	          //.forEach(System.out::println);
-	//	return null;
+	//	return null; */
 	}
 }
